@@ -67,6 +67,5 @@ public class MainActivity extends FragmentActivity {
         //绑定indicator和viewPager
         ViewPagerHelper.bind(mMagicIndicator,mContentViewPager);
 
-
     }
 }
