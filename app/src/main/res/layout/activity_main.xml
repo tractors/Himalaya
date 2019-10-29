@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <net.lucode.hackware.magicindicator.MagicIndicator
-       android:id="@+id/magic_indicator"
-       android:layout_width="match_parent"
-       android:layout_height="40dp"/>
+    <LinearLayout
+        android:id="@+id/ll_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/main_color"
+        android:orientation="horizontal">
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/search_icon"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/content_viewpager"
+        android:layout_below="@+id/ll_indicator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

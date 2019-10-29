@@ -2,27 +2,31 @@ package com.will.himalaya.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.view.View;
+
+import com.will.himalaya.util.LogUtil;
 
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.CommonPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class IndicatorAdapter extends CommonNavigatorAdapter {
 
+    private static final String TAG = "IndicatorAdapter";
     private String[] mTitles = null;
     private Context mContext;
+    private OnIndicatorTabClickListener mOnTabClickListener;
 
     public IndicatorAdapter(@NonNull String[] titles, Context context) {
-        if (null != mTitles && 0 != mTitles.length){
-            this.mTitles = titles;
+        if (null != titles && 0 !=titles.length){
+            mTitles = titles;
         }
 
         this.mContext = context;
@@ -30,11 +34,11 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
 
     @Override
     public int getCount() {
-        return (null == mTitles && 0 == mTitles.length) ? 0 : mTitles.length;
+        return (null == mTitles || 0 == mTitles.length) ? 0 : mTitles.length;
     }
 
     @Override
-    public IPagerTitleView getTitleView(Context context, int index) {
+    public IPagerTitleView getTitleView(Context context, final int index) {
 
         //创建view
         ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
@@ -52,8 +56,27 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
             @Override
             public void onClick(View view) {
                 //切换viewPager的内容，如果index不一样的话，
+                if (mOnTabClickListener != null){
+                    mOnTabClickListener.onTabClick(index);
+                }
             }
         });
+
+
+//        SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+//        simplePagerTitleView.setText(mTitles[index]);
+//        simplePagerTitleView.setTextSize(18);
+//        simplePagerTitleView.setNormalColor(Color.parseColor("#aaffffff"));
+//        simplePagerTitleView.setSelectedColor(Color.parseColor("#ffffff"));
+//        simplePagerTitleView.setSelectedColor(Color.WHITE);
+//        simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //切换viewPager的内容，如果index不一样的话，
+//            }
+//        });
+
+
         //把这个创建好的view返回去
         return colorTransitionPagerTitleView;
     }
@@ -64,5 +87,13 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
         linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
         linePagerIndicator.setColors(Color.parseColor("#ffffff"));
         return linePagerIndicator;
+    }
+
+    public void setOnIndicatorTabClickListener(OnIndicatorTabClickListener listener){
+        this.mOnTabClickListener = listener;
+    }
+
+    public interface OnIndicatorTabClickListener{
+        void onTabClick(int index);
     }
 }
