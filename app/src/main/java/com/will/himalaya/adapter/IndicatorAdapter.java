@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.TextView;
 
+import com.will.himalaya.R;
 import com.will.himalaya.util.LogUtil;
 
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
@@ -26,7 +29,9 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
 
     public IndicatorAdapter(@NonNull String[] titles, Context context) {
         if (null != titles && 0 !=titles.length){
-            mTitles = titles;
+
+            mTitles = new String[titles.length];
+            mTitles = titles.clone();
         }
 
         this.mContext = context;
@@ -61,7 +66,52 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
                 }
             }
         });
+        //把这个创建好的view返回去
+        return colorTransitionPagerTitleView;
 
+//        CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(context);
+//        commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout);
+//
+//
+//        final TextView titleText = (TextView) commonPagerTitleView.findViewById(R.id.tv_title);
+//        titleText.setText(mTitles[index]);
+//        titleText.setTextSize(18);
+//
+//        commonPagerTitleView.setOnPagerTitleChangeListener(new CommonPagerTitleView.OnPagerTitleChangeListener() {
+//            @Override
+//            public void onSelected(int index, int totalCount) {
+//                titleText.setTextColor(Color.parseColor("#ffffff"));
+//            }
+//
+//            @Override
+//            public void onDeselected(int index, int totalCount) {
+//                titleText.setTextColor(Color.parseColor("#aaffffff"));
+//            }
+//
+//            @Override
+//            public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
+//                titleText.setScaleX(1.3f + (0.8f - 1.3f) * leavePercent);
+//                titleText.setScaleY(1.3f + (0.8f - 1.3f) * leavePercent);
+//            }
+//
+//            @Override
+//            public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
+//                titleText.setScaleX(0.8f + (1.3f - 0.8f) * enterPercent);
+//                titleText.setScaleY(0.8f + (1.3f - 0.8f) * enterPercent);
+//            }
+//        });
+//
+//        commonPagerTitleView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnTabClickListener != null){
+//                    mOnTabClickListener.onTabClick(index);
+//                }
+//            }
+//        });
+//
+//        //把这个创建好的view返回去
+//        return commonPagerTitleView;
 
 //        SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
 //        simplePagerTitleView.setText(mTitles[index]);
@@ -78,15 +128,15 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
 
 
         //把这个创建好的view返回去
-        return colorTransitionPagerTitleView;
+//        return simplePagerTitleView;
     }
 
     @Override
     public IPagerIndicator getIndicator(Context context) {
-        LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
-        linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-        linePagerIndicator.setColors(Color.parseColor("#ffffff"));
-        return linePagerIndicator;
+        LinePagerIndicator indicator = new LinePagerIndicator(context);
+        indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+        indicator.setColors(Color.parseColor("#ffffff"));
+        return indicator;
     }
 
     public void setOnIndicatorTabClickListener(OnIndicatorTabClickListener listener){
