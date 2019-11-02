@@ -45,26 +45,37 @@ public class RecommendPresenter implements IRecommendPresenter{
     @Override
     public void getRecommendList() {
         Map<String,String> map = new HashMap<>();
-
+        updateLoading();
         map.put(DTransferConstants.LIKE_COUNT,String.valueOf(Constant.RECOMMEND_COUNT));
         CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 if (gussLikeAlbumList != null){
-                    List<Album> albumList = gussLikeAlbumList.getAlbumList();
-                    if (albumList != null){
-                        LogUtil.i(TAG,"size------>" + albumList.size());
-                        //upRecommendUI(albumList);
-                        handerRecommendResult(albumList);
+
+                    if (gussLikeAlbumList != null) {
+                        List<Album> albumList = gussLikeAlbumList.getAlbumList();
+                            LogUtil.i(TAG,"size------>" + albumList.size());
+
+                            handerRecommendResult(albumList);
                     }
+
                 }
             }
 
             @Override
             public void onError(int i, String s) {
                 LogUtil.e(TAG,"errorCode--->"+i + ",errorMsg-->"+ s);
+                handerError();
             }
         });
+    }
+
+    private void handerError() {
+        if (mCallbacks != null){
+            for (IRecommendViewCallback callback : mCallbacks){
+                callback.onNetworkError();
+            }
+        }
     }
 
 
@@ -73,9 +84,27 @@ public class RecommendPresenter implements IRecommendPresenter{
      * @param albumList
      */
     private void handerRecommendResult(List<Album> albumList) {
-        if (mCallbacks != null){
+        if (mCallbacks != null) {
+
+            if (albumList != null) {
+                if (albumList.size() == 0) {
+                    for (IRecommendViewCallback callback : mCallbacks) {
+                        callback.onEmpty();
+                    }
+                } else {
+                    for (IRecommendViewCallback callback : mCallbacks) {
+                        callback.onRecommendListLoaded(albumList);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void updateLoading(){
+        if (mCallbacks != null) {
             for (IRecommendViewCallback callback : mCallbacks) {
-                callback.onRecommendListLoaded(albumList);
+                callback.onLoading();
             }
         }
     }

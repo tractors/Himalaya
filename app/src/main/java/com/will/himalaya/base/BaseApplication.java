@@ -3,10 +3,13 @@ package com.will.himalaya.base;
 import android.app.Application;
 
 import com.will.himalaya.util.LogUtil;
+import com.will.himalaya.wiget.WeakHandler;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 
 public class BaseApplication extends Application {
+
+    private static WeakHandler sHandler = null;
 
     @Override
     public void onCreate() {
@@ -26,5 +29,11 @@ public class BaseApplication extends Application {
 
         LogUtil.init(this.getPackageName(),false);
 
+        sHandler = new WeakHandler();
+    }
+
+
+    public static WeakHandler getHandler(){
+        return sHandler;
     }
 }

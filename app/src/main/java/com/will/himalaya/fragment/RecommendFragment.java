@@ -16,6 +16,7 @@ import com.will.himalaya.presenter.RecommendPresenter;
 import com.will.himalaya.util.Constant;
 import com.will.himalaya.util.LogUtil;
 import com.will.himalaya.wiget.RItemDecoration;
+import com.will.himalaya.wiget.UILoader;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
@@ -33,7 +34,7 @@ import java.util.Map;
 /**
  *推荐界面
  */
-public class RecommendFragment extends BaseFragment implements IRecommendViewCallback {
+public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener {
 
     private static final String TAG = "RecommendFragment";
     private View mRootView;
@@ -41,9 +42,36 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
     private List<Album> mAlbumList;
     private RecommendListAdapter mRecommendListAdapter;
     private RecommendPresenter mRecommendPresenter;
+    private UILoader mUiLoader;
 
     @Override
-    protected View onSubViewLoaded(LayoutInflater inflater, ViewGroup container) {
+    protected View onSubViewLoaded(final LayoutInflater inflater, ViewGroup container) {
+
+        mUiLoader = new UILoader(getContext()) {
+            @Override
+            protected View getSuccessView(ViewGroup container) {
+                return createSuccessView(inflater,container);
+            }
+        };
+
+
+        mRecommendPresenter = RecommendPresenter.getInstance();
+
+        mRecommendPresenter.registerViewCallback(this);
+
+        mRecommendPresenter.getRecommendList();
+
+
+        if (mUiLoader.getParent() instanceof ViewGroup) {
+            ((ViewGroup) mUiLoader.getParent()).removeView(mUiLoader);
+        }
+
+        mUiLoader.setOnRetryClickListener(this);
+
+        return mUiLoader;
+    }
+
+    private View createSuccessView(LayoutInflater inflater, ViewGroup container) {
         mRootView = inflater.inflate(R.layout.fragment_recommend,container,false);
 
         mRecommendRv = mRootView.findViewById(R.id.recommend_list);
@@ -58,34 +86,33 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
         mRecommendRv.setAdapter(mRecommendListAdapter);
 
-        mRecommendPresenter = RecommendPresenter.getInstance();
 
-        mRecommendPresenter.registerViewCallback(this);
-        mRecommendPresenter.getRecommendList();
         return mRootView;
     }
 
-
-
-    private void upRecommendUI(List<Album> albumList) {
-        mRecommendListAdapter.setData(albumList);
-    }
 
     @Override
     public void onRecommendListLoaded(List<Album> result) {
         //获取数据成功就会被调用加载数据
         mRecommendListAdapter.setData(result);
+        mUiLoader.updateStatus(UILoader.UIStatus.SUCCESS);
     }
 
     @Override
-    public void onLoadMore(List<Album> result) {
-
+    public void onNetworkError() {
+        mUiLoader.updateStatus(UILoader.UIStatus.NETWORK_ERROR);
     }
 
     @Override
-    public void onRefreshMore(List<Album> result) {
-
+    public void onEmpty() {
+        mUiLoader.updateStatus(UILoader.UIStatus.EMPTY);
     }
+
+    @Override
+    public void onLoading() {
+        mUiLoader.updateStatus(UILoader.UIStatus.LOADING);
+    }
+
 
     @Override
     public void onDestroy() {
@@ -96,5 +123,14 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
             mRecommendPresenter.unRegisterViewCallback(this);
         }
 
+    }
+
+    @Override
+    public void onRetryClick() {
+        //网络不佳时，用户点击了重试
+        //重新获取数据
+        if (mRecommendPresenter != null){
+            mRecommendPresenter.getRecommendList();
+        }
     }
 }
