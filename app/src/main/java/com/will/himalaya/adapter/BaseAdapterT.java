@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public abstract class BaseAdapterT <T,K extends RecyclerView.ViewHolder> extends
     protected Context mContext;
     protected List<T> mList;
     protected LayoutInflater mInflater = null;
+    protected OnItemClickListener mOnItemClickListener = null;
+    private OnItemClickListenerList mOnItemClickListenerList = null;
 
     public BaseAdapterT(Context context,List<T> list){
         this.mContext = context;
@@ -45,4 +48,38 @@ public abstract class BaseAdapterT <T,K extends RecyclerView.ViewHolder> extends
     public int getItemCount() {
         return (null == mList || 0 == mList.size()) ? 0 : mList.size();
     }
+
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
+    }
+
+    public interface  OnItemClickListener<T>{
+        void onItemClick(T field, int position);
+    }
+
+    protected void setClick(View view,List<T> data){
+        int clickPosition = (int) view.getTag();
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick((T)(data.get(clickPosition)),clickPosition);
+        }
+    }
+
+    public void setOnItemClickListenerList(OnItemClickListenerList listener){
+        this.mOnItemClickListenerList = listener;
+    }
+
+    public interface OnItemClickListenerList<T>{
+        void onItemClickList(List<T> field,int position);
+    }
+
+
+
+    protected void setClickList(View view,List<T> data){
+        int clickPosition = (int) view.getTag();
+        if (null != mOnItemClickListenerList) {
+            mOnItemClickListenerList.onItemClickList(data,clickPosition);
+        }
+    }
+
 }

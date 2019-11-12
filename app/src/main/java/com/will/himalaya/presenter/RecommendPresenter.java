@@ -17,13 +17,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 推荐粘贴板实现类
+ */
 public class RecommendPresenter implements IRecommendPresenter{
 
     private static final String TAG = "RecommendPresenter";
     private List<IRecommendViewCallback> mCallbacks = new ArrayList<>();
     private RecommendPresenter(){}
 
-    private static volatile  RecommendPresenter sInstance = null;
+    private static volatile RecommendPresenter sInstance = null;
 
     private static Byte[] mBytes = new Byte[10];
 

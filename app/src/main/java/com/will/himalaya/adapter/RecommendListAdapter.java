@@ -27,6 +27,13 @@ public class RecommendListAdapter extends BaseAdapterT<Album,RecommendViewHolder
     public void onBindViewHolder(@NonNull RecommendViewHolder holder, int position) {
         holder.itemView.setTag(position);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setClick(view,mList);
+            }
+        });
+
         holder.setData(mList.get(position));
     }
 }

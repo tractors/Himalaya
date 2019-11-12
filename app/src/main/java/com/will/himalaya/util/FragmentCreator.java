@@ -1,14 +1,11 @@
 package com.will.himalaya.util;
 
-import android.support.v4.app.Fragment;
-
 import com.will.himalaya.base.BaseFragment;
 import com.will.himalaya.fragment.HistoryFragment;
 import com.will.himalaya.fragment.RecommendFragment;
 import com.will.himalaya.fragment.SubscriptionFragment;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

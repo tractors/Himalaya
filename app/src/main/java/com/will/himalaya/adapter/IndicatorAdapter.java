@@ -67,7 +67,7 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
         //把这个创建好的view返回去
         return colorTransitionPagerTitleView;
 
-//        CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(context);
+//        CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(mContext);
 //        commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout);
 //
 //
@@ -111,7 +111,7 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
 //        //把这个创建好的view返回去
 //        return commonPagerTitleView;
 
-//        SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+//        SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(mContext);
 //        simplePagerTitleView.setText(mTitles[index]);
 //        simplePagerTitleView.setTextSize(18);
 //        simplePagerTitleView.setNormalColor(Color.parseColor("#aaffffff"));

@@ -1,12 +1,11 @@
-package com.will.himalaya;
+package com.will.himalaya.activity;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
+import com.will.himalaya.R;
 import com.will.himalaya.adapter.IndicatorAdapter;
 import com.will.himalaya.adapter.MainContentAdapter;
 

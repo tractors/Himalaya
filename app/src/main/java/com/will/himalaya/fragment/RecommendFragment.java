@@ -1,40 +1,31 @@
 package com.will.himalaya.fragment;
 
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.will.himalaya.R;
+import com.will.himalaya.activity.DetailActivity;
+import com.will.himalaya.adapter.BaseAdapterT;
 import com.will.himalaya.adapter.RecommendListAdapter;
 import com.will.himalaya.base.BaseFragment;
 import com.will.himalaya.interfaces.IRecommendViewCallback;
+import com.will.himalaya.presenter.AlbumDetailPresenter;
 import com.will.himalaya.presenter.RecommendPresenter;
-import com.will.himalaya.util.Constant;
-import com.will.himalaya.util.LogUtil;
+import com.will.himalaya.util.IntentActivity;
 import com.will.himalaya.wiget.RItemDecoration;
 import com.will.himalaya.wiget.UILoader;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
-import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
-import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *推荐界面
  */
-public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener {
+public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener, BaseAdapterT.OnItemClickListener<Album> {
 
     private static final String TAG = "RecommendFragment";
     private View mRootView;
@@ -86,6 +77,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
         mRecommendRv.setAdapter(mRecommendListAdapter);
 
+        mRecommendListAdapter.setOnItemClickListener(this);
 
         return mRootView;
     }
@@ -132,5 +124,13 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         if (mRecommendPresenter != null){
             mRecommendPresenter.getRecommendList();
         }
+    }
+
+
+    @Override
+    public void onItemClick(Album field, int positionn) {
+        AlbumDetailPresenter.getInstance().setTargetAlbum(field);
+        //item被点击
+        IntentActivity.startActivity(getContext(),DetailActivity.class);
     }
 }

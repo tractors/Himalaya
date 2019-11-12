@@ -1,19 +1,27 @@
 package com.will.himalaya.base;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.will.himalaya.util.LogUtil;
+import com.will.himalaya.util.SharedPreferenceUtil;
 import com.will.himalaya.wiget.WeakHandler;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 
 public class BaseApplication extends Application {
 
     private static WeakHandler sHandler = null;
 
+    public static Context mContext = null;
+
+    public static SharedPreferenceUtil mPlayModeSp = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
         CommonRequest mXimalaya = CommonRequest.getInstanse();
         if (DTransferConstants.isRelease) {
             String mAppSecret = "8646d66d6abe2efd14f2891f9fd1c8af";
@@ -27,7 +35,12 @@ public class BaseApplication extends Application {
             mXimalaya.init(this, mAppSecret);
         }
 
+        //初始化播放器
+        XmPlayerManager.getInstance(this).init();
+
         LogUtil.init(this.getPackageName(),false);
+
+        mPlayModeSp = SharedPreferenceUtil.getInstanceForPlayer(this);
 
         sHandler = new WeakHandler();
     }
@@ -36,4 +49,10 @@ public class BaseApplication extends Application {
     public static WeakHandler getHandler(){
         return sHandler;
     }
+
+    public static Context getAppContext(){
+        return mContext;
+    }
+
+    public static SharedPreferenceUtil getSharedPre(){return mPlayModeSp;}
 }

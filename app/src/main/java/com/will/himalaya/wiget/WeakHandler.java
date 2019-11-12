@@ -151,7 +151,7 @@ public class WeakHandler {
 
     /**
      * Posts a message to an object that implements Runnable.
-     * Causes the Runnable r to executed on the next iteration through the
+     * Causes the Runnable r to executed on the next_normal iteration through the
      * message queue. The runnable will be run on the thread to which this
      * handler is attached.
      * <b>This method is only for use in very special circumstances -- it
@@ -280,7 +280,7 @@ public class WeakHandler {
 
     /**
      * Enqueue a message at the front of the message queue, to be processed on
-     * the next iteration of the message loop.  You will receive it in
+     * the next_normal iteration of the message loop.  You will receive it in
      * callback, in the thread attached to this handler.
      * <b>This method is only for use in very special circumstances -- it
      * can easily starve the message queue, cause ordering problems, or have
