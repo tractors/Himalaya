@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.will.himalaya.presenter.PlayerPresenter.PLAY_LIST_IS_REVERSE_KEY;
 import static com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl.PlayMode.PLAY_MODEL_LIST;
 import static com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl.PlayMode.PLAY_MODEL_LIST_LOOP;
 import static com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl.PlayMode.PLAY_MODEL_RANDOM;
@@ -96,7 +95,7 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCall
             @Override
             public void onClick(View view) {
                 //如果现在的状态是正在播放，那么就暂停
-                if (mPlayerPresenter.isPlay()) {
+                if (mPlayerPresenter.isPlaying()) {
                     mPlayerPresenter.pause();
                 } else {
                     //如果现在的状态是非播放状态，那么就播放

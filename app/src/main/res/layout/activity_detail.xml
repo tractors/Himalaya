@@ -39,22 +39,33 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/light_gray">
-        <ImageView
-            android:id="@+id/detail_play_control"
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+
+        <LinearLayout
+            android:id="@+id/detail_play_status_container"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/play_icon"/>
-        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@+id/detail_play_control"
-            android:textSize="14sp"
-            android:text="继续播放"/>
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/detail_play_control"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/play_icon"/>
+            <TextView
+                android:id="@+id/play_control_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="140dp"
+                android:layout_marginLeft="12dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:textSize="14sp"
+                android:text="@string/click_play_tips_text"/>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,6 +107,9 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/white"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:text="这个是标题"/>
         <TextView
             android:id="@+id/tv_album_author"

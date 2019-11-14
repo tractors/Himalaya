@@ -16,8 +16,6 @@ public class BaseApplication extends Application {
 
     public static Context mContext = null;
 
-    public static SharedPreferenceUtil mPlayModeSp = null;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,8 +38,6 @@ public class BaseApplication extends Application {
 
         LogUtil.init(this.getPackageName(),false);
 
-        mPlayModeSp = SharedPreferenceUtil.getInstanceForPlayer(this);
-
         sHandler = new WeakHandler();
     }
 
@@ -54,5 +50,4 @@ public class BaseApplication extends Application {
         return mContext;
     }
 
-    public static SharedPreferenceUtil getSharedPre(){return mPlayModeSp;}
 }

@@ -217,7 +217,7 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
     }
 
     @Override
-    public boolean isPlay() {
+    public boolean isPlaying() {
         //返回当前是否正在播放
         return mPlayerManager.isPlaying();
     }
@@ -244,6 +244,12 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
 
 
         mPlayModeSp.saveBoolean(PLAY_LIST_IS_REVERSE_KEY,mIsReverse);
+    }
+
+    @Override
+    public boolean hasPlayList() {
+
+        return isPlayListSet;
     }
 
     @Override

@@ -219,11 +219,11 @@ public class SobPopwindow extends PopupWindow{
 
     /**
      * 是否更改排序方式
-     * @param isOrder
+     * @param isReverse
      */
-    public void updateOrderIcon(boolean isOrder){
-        mOrderIcon.setImageResource(isOrder ? R.drawable.selector_player_mode_list_order : R.drawable.selector_player_mode_list_revers);
-        mOrderText.setText(isOrder ? R.string.play_order_ascending : R.string.play_order_descending);
+    public void updateOrderIcon(boolean isReverse){
+        mOrderIcon.setImageResource(isReverse ? R.drawable.selector_player_mode_list_order : R.drawable.selector_player_mode_list_revers);
+        mOrderText.setText(isReverse ? R.string.play_order_ascending : R.string.play_order_descending);
     }
 
     /**

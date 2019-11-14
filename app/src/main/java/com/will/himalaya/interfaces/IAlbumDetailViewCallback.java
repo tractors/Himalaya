@@ -25,4 +25,16 @@ public interface IAlbumDetailViewCallback {
      * 网络错误
      */
     void onNetworkError(int errorCode,String errorMsg);
+
+    /**
+     * 加载更多的结果
+     * @param isOkay true表示加载成功，false表示加载失败
+     */
+    void onLoaderMoreFinished(boolean isOkay);
+
+    /**
+     * 下拉刷新结果
+     * @param isOkay true表示加载成功，false表示加载失败
+     */
+    void onRefreshFinished(boolean isOkay);
 }
