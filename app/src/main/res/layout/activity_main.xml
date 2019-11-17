@@ -21,6 +21,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent">
             <ImageView
+                android:id="@+id/search_btn"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_centerInParent="true"
@@ -68,14 +69,14 @@
                 android:singleLine="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:text="我是大标题"/>
+                android:text="@string/listener_as_you_like_text"/>
             <TextView
                 android:id="@+id/main_sub_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="#7f7f7f"
-                android:text="作者名称"/>
+                android:text="@string/app_name"/>
         </LinearLayout>
 
         <ImageView

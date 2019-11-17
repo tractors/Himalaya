@@ -1,12 +1,12 @@
 package com.will.himalaya.fragment;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.will.himalaya.R;
 import com.will.himalaya.activity.DetailActivity;
 import com.will.himalaya.adapter.BaseAdapterT;
@@ -68,6 +68,9 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         mRecommendRv = mRootView.findViewById(R.id.recommend_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        TwinklingRefreshLayout twinklingRefreshLayout = mRootView.findViewById(R.id.over_scroll_view);
+        twinklingRefreshLayout.setPureScrollModeOn();
 
         mRecommendRv.setLayoutManager(linearLayoutManager);
 

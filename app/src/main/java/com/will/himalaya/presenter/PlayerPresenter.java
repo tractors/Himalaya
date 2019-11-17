@@ -16,6 +16,7 @@ import com.ximalaya.ting.android.opensdk.model.track.Track;
 import com.ximalaya.ting.android.opensdk.model.track.TrackList;
 import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 import com.ximalaya.ting.android.opensdk.player.advertis.IXmAdsStatusListener;
+import com.ximalaya.ting.android.opensdk.player.constants.PlayerConstants;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl.PlayMode;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
@@ -66,6 +67,8 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
     private PlayMode mCurrentPlayMode = PlayMode.PLAY_MODEL_LIST;
 
     private boolean mIsReverse = false;
+    private int mCurrentProgressPosition = 0;
+    private int mProgressDuration = 0;
 
     public PlayerPresenter(){
         mPlayerManager = XmPlayerManager.getInstance(BaseApplication.getAppContext());
@@ -285,7 +288,10 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
 
     @Override
     public void registerViewCallback(IPlayerViewCallback callback) {
+        //通知当前的节目
         callback.onTrackUpdate(mCurrentTrack,mCurrentIndex);
+        callback.onProgressChange(mCurrentProgressPosition,mProgressDuration);
+        handlePlayStatus(callback);
         //从sp中取出 播放模式
         int modeIndex = mPlayModeSp.getInt(PLAY_MODE_SP_KEY,PLAY_MODEL_LIST_INT);
 
@@ -298,6 +304,21 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
         callback.onPlayModeChange(mCurrentPlayMode);
         if (!mIPlayerViewCallbacks.contains(callback)) {
             mIPlayerViewCallbacks.add(callback);
+        }
+    }
+
+    //根据播放状态更新UI
+    private void handlePlayStatus(IPlayerViewCallback callback) {
+        int playerStatus = mPlayerManager.getPlayerStatus();
+        //根据状态调用接口的方法
+        if (PlayerConstants.STATE_STARTED == playerStatus) {
+            callback.onPlayStart();
+        } else if (PlayerConstants.STATE_PAUSED == playerStatus){
+           callback.onPlayPause();
+        } else if(PlayerConstants.STATE_STOPPED == playerStatus){
+            callback.onPlayStop();
+        } else {
+            callback.onPlayStop();
         }
     }
 
@@ -418,6 +439,8 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
 
     @Override
     public void onPlayProgress(int currPos, int duration) {
+        this.mCurrentProgressPosition = currPos;
+        this.mProgressDuration = duration;
         //单位毫秒
         for (IPlayerViewCallback iPlayerViewCallback : mIPlayerViewCallbacks) {
             iPlayerViewCallback.onProgressChange(currPos,duration);

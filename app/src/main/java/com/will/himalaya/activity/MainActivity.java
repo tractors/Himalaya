@@ -17,6 +17,7 @@ import com.will.himalaya.adapter.MainContentAdapter;
 import com.will.himalaya.interfaces.IPlayerViewCallback;
 import com.will.himalaya.presenter.PlayerPresenter;
 import com.will.himalaya.presenter.RecommendPresenter;
+import com.will.himalaya.util.IntentActivity;
 import com.will.himalaya.wiget.RoundRectImageView;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
@@ -40,6 +41,7 @@ public class MainActivity extends FragmentActivity implements IPlayerViewCallbac
     private ImageView mPlayControl;
     private PlayerPresenter mPlayerPresenter;
     private LinearLayout mPlayControlItem;
+    private ImageView mSearchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,13 @@ public class MainActivity extends FragmentActivity implements IPlayerViewCallbac
                 startActivity(new Intent(MainActivity.this,PlayerActivity.class));
             }
         });
+
+        mSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentActivity.startActivity(MainActivity.this,SearchActivity.class);
+            }
+        });
     }
 
     /**
@@ -152,6 +161,8 @@ public class MainActivity extends FragmentActivity implements IPlayerViewCallbac
         mPlayControl = this.findViewById(R.id.main_play_control);
 
         mPlayControlItem = this.findViewById(R.id.main_play_control_item);
+
+        mSearchBtn = this.findViewById(R.id.search_btn);
     }
 
     @Override

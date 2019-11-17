@@ -27,10 +27,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.DetailActivity" />
-        <activity android:name=".activity.PlayerActivity"/>
+        <activity android:name=".activity.PlayerActivity" />
 
-        <service android:name="com.ximalaya.ting.android.opensdk.player.service.XmPlayerService"
-            android:process=":player"/>
+        <service
+            android:name="com.ximalaya.ting.android.opensdk.player.service.XmPlayerService"
+            android:process=":player" />
+
+        <activity android:name=".activity.SearchActivity"></activity>
     </application>
 
 </manifest>
