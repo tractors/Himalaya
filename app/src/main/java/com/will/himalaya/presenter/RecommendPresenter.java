@@ -2,20 +2,16 @@ package com.will.himalaya.presenter;
 
 import android.support.annotation.Nullable;
 
+import com.will.himalaya.api.XimalayApi;
 import com.will.himalaya.interfaces.IRecommendPresenter;
 import com.will.himalaya.interfaces.IRecommendViewCallback;
-import com.will.himalaya.util.Constant;
 import com.will.himalaya.util.LogUtil;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 推荐粘贴板实现类
@@ -24,6 +20,8 @@ public class RecommendPresenter implements IRecommendPresenter{
 
     private static final String TAG = "RecommendPresenter";
     private List<IRecommendViewCallback> mCallbacks = new ArrayList<>();
+    private List<Album> mCurrentRecommend = null;
+
     private RecommendPresenter(){}
 
     private static volatile RecommendPresenter sInstance = null;
@@ -43,37 +41,43 @@ public class RecommendPresenter implements IRecommendPresenter{
     }
 
     /**
+     * \获取当前的推荐专辑列表
+     * @return  使用前判空
+     */
+    public List<Album> getCurrentRecommend(){
+        return mCurrentRecommend;
+    }
+
+    /**
      * 获取推荐内容,其实是猜你喜欢
      */
     @Override
     public void getRecommendList() {
-        Map<String,String> map = new HashMap<>();
         updateLoading();
-        map.put(DTransferConstants.LIKE_COUNT,String.valueOf(Constant.RECOMMEND_COUNT));
-        CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
+        XimalayApi.getXimalayApi().getRecommendList(new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 if (gussLikeAlbumList != null){
 
                     if (gussLikeAlbumList != null) {
                         List<Album> albumList = gussLikeAlbumList.getAlbumList();
-                            LogUtil.i(TAG,"size------>" + albumList.size());
+                        LogUtil.i(TAG,"size------>" + albumList.size());
 
-                            handerRecommendResult(albumList);
+                        handerRecommendResult(albumList);
                     }
 
                 }
             }
 
             @Override
-            public void onError(int i, String s) {
-                LogUtil.e(TAG,"errorCode--->"+i + ",errorMsg-->"+ s);
-                handerError();
+            public void onError(int errorCode, String errorMsg) {
+                LogUtil.e(TAG,"errorCode--->"+errorCode + ",errorMsg-->"+ errorMsg);
+                handlerError();
             }
         });
     }
 
-    private void handerError() {
+    private void handlerError() {
         if (mCallbacks != null){
             for (IRecommendViewCallback callback : mCallbacks){
                 callback.onNetworkError();
@@ -98,6 +102,8 @@ public class RecommendPresenter implements IRecommendPresenter{
                     for (IRecommendViewCallback callback : mCallbacks) {
                         callback.onRecommendListLoaded(albumList);
                     }
+
+                    this.mCurrentRecommend = albumList;
                 }
             }
         }

@@ -34,6 +34,57 @@
         android:layout_below="@+id/ll_indicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:layout_above="@+id/main_play_control_item"
+        android:overScrollMode="never"/>
+
+    <LinearLayout
+        android:id="@+id/main_play_control_item"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_light"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.will.himalaya.wiget.RoundRectImageView
+            android:id="@+id/main_track_cover"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/logo"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/main_head_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#444444"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:text="我是大标题"/>
+            <TextView
+                android:id="@+id/main_sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#7f7f7f"
+                android:text="作者名称"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/main_play_control"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:src="@drawable/selector_player_play"/>
+    </LinearLayout>
 
 </RelativeLayout>

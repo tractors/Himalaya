@@ -2,6 +2,7 @@ package com.will.himalaya.presenter;
 
 import android.support.annotation.Nullable;
 
+import com.will.himalaya.api.XimalayApi;
 import com.will.himalaya.interfaces.IAlbumDetailPresenter;
 import com.will.himalaya.interfaces.IAlbumDetailViewCallback;
 import com.will.himalaya.util.Constant;
@@ -64,12 +65,7 @@ public class AlbumDetailPresenter implements IAlbumDetailPresenter {
 
     private void doLoaded(final boolean isLoaderMore){
         //根据页码和专辑id获取列表
-        Map<String,String> map = new HashMap<>();
-        map.put(DTransferConstants.ALBUM_ID,String.valueOf(mCurrentAlbumId));
-        map.put(DTransferConstants.SORT,"asc");
-        map.put(DTransferConstants.PAGE,String.valueOf(mCurrentPageIndex));
-        map.put(DTransferConstants.PAGE_SIZE,String.valueOf(Constant.DETAIL_COUNT));
-        CommonRequest.getTracks(map, new IDataCallBack<TrackList>() {
+        XimalayApi.getXimalayApi().getAlbumDetail(mCurrentAlbumId, mCurrentPageIndex, new IDataCallBack<TrackList>() {
             @Override
             public void onSuccess(@Nullable TrackList trackList) {
                 if (trackList != null) {

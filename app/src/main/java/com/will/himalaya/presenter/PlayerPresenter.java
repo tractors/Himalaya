@@ -1,14 +1,19 @@
 package com.will.himalaya.presenter;
 
+import android.support.annotation.Nullable;
+
+import com.will.himalaya.api.XimalayApi;
 import com.will.himalaya.base.BaseApplication;
 import com.will.himalaya.interfaces.IPlayerPresenter;
 import com.will.himalaya.interfaces.IPlayerViewCallback;
 import com.will.himalaya.util.LogUtil;
 import com.will.himalaya.util.SharedPreferenceUtil;
+import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.PlayableModel;
 import com.ximalaya.ting.android.opensdk.model.advertis.Advertis;
 import com.ximalaya.ting.android.opensdk.model.advertis.AdvertisList;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
+import com.ximalaya.ting.android.opensdk.model.track.TrackList;
 import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 import com.ximalaya.ting.android.opensdk.player.advertis.IXmAdsStatusListener;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
@@ -33,6 +38,7 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
     private static volatile PlayerPresenter sPlayerPresenter = null;
     private static byte[] bytes = new byte[10];
     private XmPlayerManager mPlayerManager;
+    private static final int DEFAULT_PLAY_INDEX = 0;
 
     private List<IPlayerViewCallback> mIPlayerViewCallbacks = new ArrayList<>();
     private Track mCurrentTrack;
@@ -250,6 +256,31 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
     public boolean hasPlayList() {
 
         return isPlayListSet;
+    }
+
+    @Override
+    public void playByAlbumId(long id) {
+        //1.获取到专辑的列表内容
+        XimalayApi ximalayApi = XimalayApi.getXimalayApi();
+        ximalayApi.getAlbumDetail((int) id, 1, new IDataCallBack<TrackList>() {
+            @Override
+            public void onSuccess(@Nullable TrackList trackList) {
+                List<Track> tracks = trackList.getTracks();
+                if (tracks != null && 0 < tracks.size()) {
+                    mPlayerManager.setPlayList(tracks,DEFAULT_PLAY_INDEX);
+                    isPlayListSet = true;
+                    mCurrentTrack = tracks.get(DEFAULT_PLAY_INDEX);
+                    mCurrentIndex = DEFAULT_PLAY_INDEX;
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                LogUtil.d(TAG,"errorCode:"+errorCode +",errorMsg:"+errorMsg);
+            }
+        });
+        //2.把专辑内容设置给播放器
+        //3.开始播放
     }
 
     @Override

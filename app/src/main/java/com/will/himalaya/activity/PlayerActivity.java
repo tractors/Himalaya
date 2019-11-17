@@ -407,6 +407,9 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCall
 
     @Override
     public void onTrackUpdate(Track track,int playIndex) {
+        if (track == null) {
+            return;
+        }
         this.mTrackTitleText = track.getTrackTitle();
         if (mTrackTitleTv != null) {
             LogUtil.d(TAG,"title:" + mTrackTitleText);

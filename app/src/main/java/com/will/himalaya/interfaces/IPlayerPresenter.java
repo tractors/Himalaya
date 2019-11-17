@@ -73,4 +73,10 @@ public interface IPlayerPresenter extends IBasePresenter<IPlayerViewCallback> {
      */
     boolean hasPlayList();
 
+    /**
+     * 通过专辑的ID 播放内容
+     * @param id
+     */
+    void playByAlbumId(long id);
+
 }
