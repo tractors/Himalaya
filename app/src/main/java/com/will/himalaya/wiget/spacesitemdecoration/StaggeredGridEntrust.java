@@ -15,7 +15,7 @@ public class StaggeredGridEntrust extends SpacesItemDecorationEntrust{
 
     @Override
     void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        //TODO 因为排列的不确定性，暂时没找到比较好的处理方式
+        // 因为排列的不确定性，暂时没找到比较好的处理方式
 
     }
 

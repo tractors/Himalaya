@@ -171,6 +171,8 @@ public class MainActivity extends FragmentActivity implements IPlayerViewCallbac
         if (mPlayerPresenter != null) {
             mPlayerPresenter.unRegisterViewCallback(this);
         }
+
+        mPlayerPresenter = null;
     }
 
     @Override

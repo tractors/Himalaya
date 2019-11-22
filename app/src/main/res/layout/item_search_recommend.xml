@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/selector_search_recommend_bg"
+    android:layout_height="40dp">
+
+    <ImageView
+        android:id="@+id/search_recommend_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/search_icon"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/search_recommend_item"
+        android:layout_toRightOf="@id/search_recommend_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:textColor="@color/sub_text_title"
+        android:text="标题"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/sub_text_title_99"/>-->
+</RelativeLayout>

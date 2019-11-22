@@ -200,7 +200,8 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
         //刷新空间监听
         BezierLayout bezierLayout = new BezierLayout(this);
         mDetailRefreshLayout.setHeaderView(bezierLayout);
-        mDetailRefreshLayout.setHeaderHeight(140);
+        mDetailRefreshLayout.setMaxHeadHeight(140);
+        mDetailRefreshLayout.setOverScrollBottomShow(false);
         mDetailRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
@@ -316,8 +317,13 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
         if (mAlbumDetailPresenter != null) {
             mAlbumDetailPresenter.unRegisterViewCallback(this);
         }
+        mAlbumDetailPresenter = null;
 
+        if (mPlayerPresenter != null) {
+            mPlayerPresenter.unRegisterViewCallback(this);
+        }
 
+        mPlayerPresenter = null;
     }
 
     @Override

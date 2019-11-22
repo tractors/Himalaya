@@ -33,7 +33,7 @@
             android:name="com.ximalaya.ting.android.opensdk.player.service.XmPlayerService"
             android:process=":player" />
 
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

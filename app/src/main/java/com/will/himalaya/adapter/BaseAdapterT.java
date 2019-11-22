@@ -44,6 +44,10 @@ public abstract class BaseAdapterT <T,K extends RecyclerView.ViewHolder> extends
         }
     }
 
+    public int getDataSize(){
+        return (null == mList || 0 == mList.size()) ? 0 : mList.size();
+    }
+
     @Override
     public int getItemCount() {
         return (null == mList || 0 == mList.size()) ? 0 : mList.size();

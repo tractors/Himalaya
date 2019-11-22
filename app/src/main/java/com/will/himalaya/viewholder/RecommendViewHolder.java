@@ -1,6 +1,7 @@
 package com.will.himalaya.viewholder;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,8 +27,12 @@ public class RecommendViewHolder extends RecyclerView.ViewHolder{
          descriptionTv.setText(album.getAlbumIntro());
          albumPlayCountTv.setText(album.getPlayCount()+"");
          albumConentCountTv.setText(album.getIncludeTrackCount()+"");
-
-        Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(albumCoverIv);
+         String coverUrlLarge = album.getCoverUrlLarge();
+        if (!TextUtils.isEmpty(coverUrlLarge)) {
+            Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(albumCoverIv);
+        } else {
+            albumCoverIv.setImageResource(R.mipmap.logo);
+        }
 
     }
 }

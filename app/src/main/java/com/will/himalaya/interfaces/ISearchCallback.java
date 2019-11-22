@@ -1,7 +1,7 @@
 package com.will.himalaya.interfaces;
 
 import com.ximalaya.ting.android.opensdk.model.album.Album;
-import com.ximalaya.ting.android.opensdk.model.word.HotWordList;
+import com.ximalaya.ting.android.opensdk.model.word.HotWord;
 import com.ximalaya.ting.android.opensdk.model.word.QueryResult;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public interface ISearchCallback {
 
     /**
      * 热词查询结果回调
-     * @param hotWordLists
+     * @param hotWordList
      */
-    void onHotWordLoaded(List<HotWordList> hotWordLists);
+    void onHotWordLoaded(List<HotWord> hotWordList);
 
     /**
      * 加载更多结果回调
@@ -35,4 +35,11 @@ public interface ISearchCallback {
      * @param keyWordList
      */
     void onRecommendWord(List<QueryResult> keyWordList);
+
+    /**
+     * 错误通知回调接口
+     * @param errorCode
+     * @param errorMsg
+     */
+    void onError(int errorCode,String errorMsg);
 }
