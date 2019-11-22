@@ -13,6 +13,9 @@ import com.ximalaya.ting.android.opensdk.model.track.Track;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * 详情列表适配器
+ */
 public class DetailListAdapter extends BaseAdapterT<Track,DetailListViewHolder>{
 
     public DetailListAdapter(Context context, List<Track> list) {

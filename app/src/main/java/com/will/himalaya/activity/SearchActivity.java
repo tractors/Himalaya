@@ -44,6 +44,9 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 搜索模块
+ */
 public class SearchActivity extends BaseActivity implements ISearchCallback, BaseAdapterT.OnItemClickListener<Album> {
 
     private static final String TAG = "SearchActivity";

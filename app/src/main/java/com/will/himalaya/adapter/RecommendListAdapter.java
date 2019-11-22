@@ -11,6 +11,9 @@ import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import java.util.List;
 
+/**
+ * 推荐适配器
+ */
 public class RecommendListAdapter extends BaseAdapterT<Album,RecommendViewHolder>{
     public RecommendListAdapter(Context context, List<Album> list) {
         super(context, list);

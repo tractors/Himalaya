@@ -420,7 +420,7 @@ void *blu_RGB_565(short *pix, int w, int h, int radius) {
 extern "C" {
 #endif
 /*
- * Class:     com_pecoo_blurjnidemo_NativeHelper
+ * Class:     com_will_himalaya_nativeclass_NativeHelper
  * Method:    blurBitmap
  * Signature: (Ljava/lang/Object;I)V
  */

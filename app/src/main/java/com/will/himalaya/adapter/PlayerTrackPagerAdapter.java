@@ -14,6 +14,9 @@ import com.ximalaya.ting.android.opensdk.model.track.Track;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 播放器模块的页面适配器
+ */
 public class PlayerTrackPagerAdapter extends PagerAdapter{
 
     private List<Track> mData = new ArrayList<>();

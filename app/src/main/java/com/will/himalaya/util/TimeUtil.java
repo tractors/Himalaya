@@ -2,6 +2,9 @@ package com.will.himalaya.util;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * 时间格式工具
+ */
 public class TimeUtil {
 
 

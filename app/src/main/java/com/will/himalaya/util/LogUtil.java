@@ -2,6 +2,9 @@ package com.will.himalaya.util;
 
 import android.util.Log;
 
+/**
+ * 日志工具
+ */
 public class LogUtil {
     public static String sTAG = "LogUtil";
 

@@ -1,5 +1,8 @@
 package com.will.himalaya.util;
 
+/**
+ * 公共基类
+ */
 public class Constant {
 
     //获取推荐列表的专辑数量

@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 适配器基类
+ * @param <T> 数据类型
+ * @param <K> viewHolder类型
+ */
 public abstract class BaseAdapterT <T,K extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<K>{
 
     protected Context mContext;

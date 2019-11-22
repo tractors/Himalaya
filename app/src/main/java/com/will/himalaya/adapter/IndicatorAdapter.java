@@ -17,7 +17,9 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 
-
+/**
+ * 指示器适配器
+ */
 public class IndicatorAdapter extends CommonNavigatorAdapter {
 
     private static final String TAG = "IndicatorAdapter";

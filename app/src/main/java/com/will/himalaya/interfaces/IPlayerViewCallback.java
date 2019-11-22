@@ -6,6 +6,9 @@ import com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl.PlayMo
 
 import java.util.List;
 
+/**
+ * 播放回调
+ */
 public interface IPlayerViewCallback {
 
     /**

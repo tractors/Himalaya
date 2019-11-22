@@ -1,7 +1,7 @@
 package com.will.himalaya.base;
 
 /**
- * 基础回调
+ * presenter基础回调
  * @param <T>
  */
 public interface IBasePresenter<T> {

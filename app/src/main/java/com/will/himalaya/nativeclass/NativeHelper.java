@@ -2,6 +2,9 @@ package com.will.himalaya.nativeclass;
 
 import android.graphics.Bitmap;
 
+/**
+ * Native 处理图片高斯模糊
+ */
 public class NativeHelper {
     static {
         System.loadLibrary("blur");

@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Fragment基类
+ */
 public abstract class BaseFragment extends Fragment{
     private View mRootView;
     @Nullable

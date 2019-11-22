@@ -17,6 +17,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * SharedPrefernce基类
+ */
 public class BaseSharedPreferencesUtil {
 
     private SharedPreferences settings;

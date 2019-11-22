@@ -11,6 +11,9 @@ import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import java.util.List;
 
+/**
+ * 搜索结果适配器
+ */
 public class SearchResultListAdapter extends BaseAdapterT<Album,RecommendViewHolder>{
     public SearchResultListAdapter(Context context, List<Album> list) {
         super(context, list);

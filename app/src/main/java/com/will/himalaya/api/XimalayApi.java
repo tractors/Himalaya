@@ -13,6 +13,9 @@ import com.ximalaya.ting.android.opensdk.model.word.SuggestWords;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 网络访问接口API
+ */
 public class XimalayApi {
 
     private static XimalayApi sXimalayApi = null;

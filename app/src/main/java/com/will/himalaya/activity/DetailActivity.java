@@ -46,6 +46,9 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 详情列表模块
+ */
 public class DetailActivity extends BaseActivity implements IAlbumDetailViewCallback, UILoader.OnRetryClickListener, BaseAdapterT.OnItemClickListenerList<Track>,IPlayerViewCallback {
 
     private static final String TAG = "DetailActivity";

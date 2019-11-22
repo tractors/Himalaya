@@ -2,7 +2,9 @@ package com.will.himalaya.util;
 
 import android.content.Context;
 
-
+/**
+ * sharedPreference工具
+ */
 public class SharedPreferenceUtil extends BaseSharedPreferencesUtil{
 
     private static SharedPreferenceUtil instance;

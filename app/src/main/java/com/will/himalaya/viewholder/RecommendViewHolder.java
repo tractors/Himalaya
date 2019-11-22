@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide;
 import com.will.himalaya.R;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
+/**
+ * 推荐ViewHolder
+ */
 public class RecommendViewHolder extends RecyclerView.ViewHolder{
 
     public RecommendViewHolder(View itemView) {
