@@ -1,4 +1,4 @@
-package com.will.himalaya.interfaces;
+package com.will.himalaya.api.data;
 
 import com.ximalaya.ting.android.opensdk.model.track.Track;
 

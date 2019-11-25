@@ -18,7 +18,7 @@ public class Constant {
 
     //数据库字段设定常量
     //订阅的表名
-    public static final String SUB_TB_NAME = "subTb";
+    public static final String SUB_TB_NAME = "tb_subscription";
     public static final String SUB_ID = "_id";
     public static final String SUB_COVER_URL = "cover_url";
     public static final String SUB_TITLE = "title";
@@ -29,4 +29,13 @@ public class Constant {
     public static final String SUB_ALBUM_ID = "album_id";
     //订阅最多个数
     public static final int MAX_SUB_COUNT = 100;
+    //历史记录的表名
+    public static final String HISTORY_TB_NAME = "tb_history";
+    public static final String HISTORY_ID = "_id";
+    public static final String HISTORY_TRACK_ID = "history_track_id";
+    public static final String HISTORY_TITLE = "history_title";
+    public static final String HISTORY_PLAY_COUNT = "history_play_count";
+    public static final String HISTORY_DURATION = "history_duration";
+    public static final String HISTORY_UPDATE_TIME = "history_update_time";
+    public static final String HISTORY_COVER = "history_cover";
 }

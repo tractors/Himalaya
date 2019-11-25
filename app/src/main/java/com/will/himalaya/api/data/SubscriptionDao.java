@@ -161,7 +161,7 @@ public class SubscriptionDao implements ISubDao {
                 db.close();
             }
 
-            LogUtil.d(TAG,"result:--------->"+result.size());
+            LogUtil.d(TAG,"result:--------->"+(result == null || 0 ==result.size() ? 0 : result.size()));
             if (mISubDaoCallback != null) {
                 mISubDaoCallback.onSubListLoaded(result);
             }
