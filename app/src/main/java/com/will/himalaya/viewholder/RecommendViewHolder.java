@@ -24,12 +24,12 @@ public class RecommendViewHolder extends RecyclerView.ViewHolder{
          ImageView albumCoverIv = itemView.findViewById(R.id.album_cover);
          TextView albumTitleTv = itemView.findViewById(R.id.album_title_tv);
          TextView albumPlayCountTv = itemView.findViewById(R.id.album_play_count);
-         TextView albumConentCountTv = itemView.findViewById(R.id.album_content_size);
+         TextView albumContentCountTv = itemView.findViewById(R.id.album_content_size);
 
          albumTitleTv.setText(album.getAlbumTitle());
          descriptionTv.setText(album.getAlbumIntro());
          albumPlayCountTv.setText(album.getPlayCount()+"");
-         albumConentCountTv.setText(album.getIncludeTrackCount()+"");
+         albumContentCountTv.setText(album.getIncludeTrackCount()+"");
          String coverUrlLarge = album.getCoverUrlLarge();
         if (!TextUtils.isEmpty(coverUrlLarge)) {
             Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(albumCoverIv);

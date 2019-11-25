@@ -110,6 +110,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback, Bas
         }
 
         mResultContainer.addView(mUILoader);
+        //mUILoader.setEmptyTipsResId(R.string.empty_tips_search_text);
     }
 
     /**

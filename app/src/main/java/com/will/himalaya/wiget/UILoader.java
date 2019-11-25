@@ -3,11 +3,13 @@ package com.will.himalaya.wiget;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.will.himalaya.R;
 import com.will.himalaya.base.BaseApplication;
@@ -19,6 +21,7 @@ public abstract class UILoader extends FrameLayout{
     private View mNetworkErrorView;
     private View mEmptyView;
     private OnRetryClickListener mOnRetryClickListener = null;
+    private TextView mTipsView;
 
     public enum UIStatus{
         LOADING,SUCCESS,NETWORK_ERROR,EMPTY,NONE
@@ -90,11 +93,25 @@ public abstract class UILoader extends FrameLayout{
         mEmptyView.setVisibility(mCurrentStatus == UIStatus.EMPTY ? VISIBLE : GONE);
     }
 
-    private View getEmptyView() {
-        return LayoutInflater.from(getContext()).inflate(R.layout.fragment_empty_view,this,false);
+    protected View getEmptyView() {
+        View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_empty_view,this,false);
+        mTipsView = emptyView.findViewById(R.id.empty_view_tips_tv);
+        return emptyView;
     }
 
-    private View getNetworkErrorView() {
+    public void setEmptyTips(String tips){
+        if (mTipsView != null) {
+            mTipsView.setText(tips);
+        }
+    }
+
+    public void setEmptyTipsResId(@StringRes int resId){
+        if (mTipsView != null) {
+            mTipsView.setText(resId);
+        }
+    }
+
+    protected View getNetworkErrorView() {
         View networkErrorView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_newtwork_error_view,this,false);
         networkErrorView.findViewById(R.id.network_error_icon).setOnClickListener(new OnClickListener() {
             @Override
@@ -110,7 +127,7 @@ public abstract class UILoader extends FrameLayout{
 
     protected abstract View getSuccessView(ViewGroup container);
 
-    private View getLoadingView() {
+    protected View getLoadingView() {
         return LayoutInflater.from(getContext()).inflate(R.layout.fragment_loading_view,this,false);
     }
 

@@ -3,9 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/over_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="订阅"
-        android:textSize="20sp"/>
+        android:background="@color/recycler_back_ground_color" >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/sub_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 </RelativeLayout>
