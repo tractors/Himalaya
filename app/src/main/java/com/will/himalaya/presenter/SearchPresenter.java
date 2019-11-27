@@ -25,7 +25,7 @@ public class SearchPresenter implements ISearchPresenter{
 
     private List<Album> mSearchResult = new ArrayList<>();
     private static final String TAG = "SearchPresenter";
-    private static SearchPresenter sSearchPresenter = null;
+    private static volatile SearchPresenter sSearchPresenter = null;
     private static byte[] sBytes = new byte[10];
     //当前搜索的关键字
     private String mCurrentKeyword = null;

@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.RequestManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +21,15 @@ public abstract class BaseAdapterT <T,K extends RecyclerView.ViewHolder> extends
 
     protected Context mContext;
     protected List<T> mList;
+    protected RequestManager mGlide = null;
     protected LayoutInflater mInflater = null;
     protected OnItemClickListener mOnItemClickListener = null;
     private OnItemClickListenerList mOnItemClickListenerList = null;
     private OnItemLongClickListener mOnItemLongClickListener = null;
 
-    public BaseAdapterT(Context context,List<T> list){
+    public BaseAdapterT(Context context,List<T> list,RequestManager glide){
         this.mContext = context;
+        this.mGlide = glide;
         mInflater = LayoutInflater.from(mContext);
         if (null == list || 0 == list.size()){
             this.mList = new ArrayList<>();

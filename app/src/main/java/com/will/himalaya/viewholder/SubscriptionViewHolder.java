@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
@@ -15,8 +16,10 @@ import com.ximalaya.ting.android.opensdk.model.album.Album;
  */
 public class SubscriptionViewHolder extends RecyclerView.ViewHolder{
 
-    public SubscriptionViewHolder(View itemView) {
+    private RequestManager mGlide = null;
+    public SubscriptionViewHolder(View itemView, RequestManager glide) {
         super(itemView);
+        this.mGlide = glide;
     }
 
     public void setData(Album album) {
@@ -32,7 +35,7 @@ public class SubscriptionViewHolder extends RecyclerView.ViewHolder{
         albumContentCountTv.setText(album.getIncludeTrackCount()+"");
         String coverUrlLarge = album.getCoverUrlLarge();
         if (!TextUtils.isEmpty(coverUrlLarge)) {
-            Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(albumCoverIv);
+                mGlide.load(album.getCoverUrlLarge()).into(albumCoverIv);
         } else {
             albumCoverIv.setImageResource(R.mipmap.logo);
         }

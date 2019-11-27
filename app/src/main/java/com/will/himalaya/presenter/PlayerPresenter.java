@@ -196,21 +196,24 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
     public void getPlayList() {
         if (mPlayerManager != null) {
             List<Track> playList = mPlayerManager.getPlayList();
-            if (!mIsReverse) {
-                Collections.reverse(playList);
-                //第一个参数是播放列表集合，第二个参数是播放下标
-                //获取反转后的下标
-                mCurrentIndex = playList.size()-1-mCurrentIndex;
+            if (playList != null && 0 != playList.size()) {
+                if (!mIsReverse) {
+                    Collections.reverse(playList);
+                    //第一个参数是播放列表集合，第二个参数是播放下标
+                    //获取反转后的下标
+                    mCurrentIndex = playList.size()-1-mCurrentIndex;
 
+                }
+
+                mPlayerManager.setPlayList(playList,mCurrentIndex);
+
+                for (IPlayerViewCallback iPlayerViewCallback : mIPlayerViewCallbacks) {
+                    iPlayerViewCallback.onListLoaded(playList);
+                    iPlayerViewCallback.onTrackUpdate(mCurrentTrack,mCurrentIndex);
+                    iPlayerViewCallback.updateListOrder(mIsReverse);
+                }
             }
 
-            mPlayerManager.setPlayList(playList,mCurrentIndex);
-
-            for (IPlayerViewCallback iPlayerViewCallback : mIPlayerViewCallbacks) {
-                iPlayerViewCallback.onListLoaded(playList);
-                iPlayerViewCallback.onTrackUpdate(mCurrentTrack,mCurrentIndex);
-                iPlayerViewCallback.updateListOrder(mIsReverse);
-            }
         }
     }
 
@@ -404,10 +407,19 @@ public class PlayerPresenter implements IPlayerPresenter, IXmAdsStatusListener, 
 
     @Override
     public void onSoundSwitch(PlayableModel lastModel, PlayableModel curModel) {
+
+
+        if (curModel != null) {
+
+        }
         if (curModel instanceof Track) {
             Track currentTrack = (Track) curModel;
 
             mCurrentIndex = mPlayerManager.getCurrentIndex();
+
+            //保存播放记录
+            HistoryPresenter historyPresenter = HistoryPresenter.getInstance();
+            historyPresenter.addHistory(currentTrack);
 
             if (currentTrack != null) {
                 mCurrentTrack = currentTrack;

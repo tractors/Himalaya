@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.will.himalaya.base.BaseApplication;
 import com.will.himalaya.viewholder.PopWindowPlayListViewHolder;
@@ -23,9 +24,11 @@ public class PlayListAdapter extends BaseAdapterT<Track,PopWindowPlayListViewHol
 
     private int playingIndex = -1;
     private SobPopwindow.PlayListItemClickListener mListener = null;
-    public PlayListAdapter(Context context, List<Track> list) {
-        super(context, list);
+
+    public PlayListAdapter(Context context, List<Track> list, RequestManager glide) {
+        super(context, list, glide);
     }
+
 
     @NonNull
     @Override

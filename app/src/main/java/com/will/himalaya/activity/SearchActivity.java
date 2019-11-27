@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.will.himalaya.R;
@@ -134,7 +136,8 @@ public class SearchActivity extends BaseActivity implements ISearchCallback, Bas
 
         mResultListView.setLayoutManager(linearLayoutManager);
 
-        mSearchResultListAdapter = new SearchResultListAdapter(this,mSearchResultList);
+        RequestManager mRequestManager= Glide.with(this);
+        mSearchResultListAdapter = new SearchResultListAdapter(this,mSearchResultList,mRequestManager);
 
         mResultListView.addItemDecoration(new RItemDecoration());
         mResultListView.setAdapter(mSearchResultListAdapter);
@@ -146,7 +149,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback, Bas
 
         mSearchRecommendListView.setLayoutManager(searchRecommendLayoutManager);
 
-        mSearchRecommendAdapter = new SearchRecommendAdapter(this,mSearchRecommendList);
+        mSearchRecommendAdapter = new SearchRecommendAdapter(this,mSearchRecommendList,null);
         mSearchRecommendListView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {

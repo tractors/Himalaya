@@ -42,6 +42,7 @@ public class SubscriptionDBHelper extends SQLiteOpenHelper {
                 Constant.HISTORY_COVER + " varchar," +
                 Constant.HISTORY_PLAY_COUNT +" integer," +
                 Constant.HISTORY_DURATION +" integer," +
+                Constant.HISTORY_AUTHOR +" varchar," +
                 Constant.HISTORY_UPDATE_TIME +" integer" +
                 ")";
 

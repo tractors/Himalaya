@@ -27,4 +27,5 @@
     <string name="empty_tips_sub">内容为空，赶紧去订阅吧！</string>
     <string name="dialog_tips_content">取消订阅该专辑吗？</string>
     <string name="empty_tips_search_text">没有相关内容，请别强行搜索</string>
+    <string name="empty_tips_history_text">没有历史记录哦!</string>
 </resources>

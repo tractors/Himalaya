@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.will.himalaya.viewholder.RecommendViewHolder;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
@@ -15,15 +16,17 @@ import java.util.List;
  * 推荐适配器
  */
 public class RecommendListAdapter extends BaseAdapterT<Album,RecommendViewHolder>{
-    public RecommendListAdapter(Context context, List<Album> list) {
-        super(context, list);
+
+
+    public RecommendListAdapter(Context context, List<Album> list, RequestManager glide) {
+        super(context, list, glide);
     }
 
     @NonNull
     @Override
     public RecommendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.item_recommend,parent,false);
-        return new RecommendViewHolder(itemView);
+        return new RecommendViewHolder(itemView,mGlide);
     }
 
     @Override

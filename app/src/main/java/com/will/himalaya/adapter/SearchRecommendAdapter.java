@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.will.himalaya.viewholder.SearchRecommendViewHolder;
 import com.ximalaya.ting.android.opensdk.model.word.QueryResult;
@@ -19,8 +20,8 @@ public class SearchRecommendAdapter extends BaseAdapterT<QueryResult,SearchRecom
 
     private static final String TAG = "SearchRecommendAdapter";
 
-    public SearchRecommendAdapter(Context context, List<QueryResult> list) {
-        super(context, list);
+    public SearchRecommendAdapter(Context context, List<QueryResult> list, RequestManager glide) {
+        super(context, list, glide);
     }
 
 

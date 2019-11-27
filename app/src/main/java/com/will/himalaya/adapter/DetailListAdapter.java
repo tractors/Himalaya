@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.will.himalaya.viewholder.DetailListViewHolder;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
@@ -18,12 +19,14 @@ import java.util.List;
  */
 public class DetailListAdapter extends BaseAdapterT<Track,DetailListViewHolder>{
 
-    public DetailListAdapter(Context context, List<Track> list) {
-        super(context, list);
-    }
+
 
     SimpleDateFormat mUpdateFormat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat mDurationFormat = new SimpleDateFormat("mm:ss");
+
+    public DetailListAdapter(Context context, List<Track> list, RequestManager glide) {
+        super(context, list, glide);
+    }
 
     @NonNull
     @Override
@@ -58,6 +61,14 @@ public class DetailListAdapter extends BaseAdapterT<Track,DetailListViewHolder>{
             @Override
             public void onClick(View view) {
                 setClickList(view,mList);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                setLongClick(view,mList);
+                return true;
             }
         });
     }

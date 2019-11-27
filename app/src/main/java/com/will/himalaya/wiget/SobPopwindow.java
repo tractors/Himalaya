@@ -80,7 +80,7 @@ public class SobPopwindow extends PopupWindow{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BaseApplication.getAppContext(),RecyclerView.VERTICAL,false);
         mTrackListRv.setLayoutManager(linearLayoutManager);
 
-        mPlayListAdapter = new PlayListAdapter(BaseApplication.getAppContext(),mTrackList);
+        mPlayListAdapter = new PlayListAdapter(BaseApplication.getAppContext(),mTrackList,null);
         mTrackListRv.setAdapter(mPlayListAdapter);
         //recycleView的分割线
         int topBottom = UIUtil.dip2px(BaseApplication.getAppContext(),1);

@@ -64,7 +64,8 @@ public class MainActivity extends FragmentActivity implements IPlayerViewCallbac
             @Override
             public void onTabClick(int index) {
                 if (mContentViewPager != null) {
-                    mContentViewPager.setCurrentItem(index);
+                    //不需要动画
+                    mContentViewPager.setCurrentItem(index,false);
                 }
             }
         });

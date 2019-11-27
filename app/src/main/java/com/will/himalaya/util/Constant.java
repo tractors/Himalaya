@@ -38,4 +38,7 @@ public class Constant {
     public static final String HISTORY_DURATION = "history_duration";
     public static final String HISTORY_UPDATE_TIME = "history_update_time";
     public static final String HISTORY_COVER = "history_cover";
+    public static final String HISTORY_AUTHOR = "history_author";
+    //最大历史记录数
+    public static final int MAX_HISTORY_COUNT = 100;
 }

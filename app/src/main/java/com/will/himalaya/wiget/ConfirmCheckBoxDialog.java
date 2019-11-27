@@ -7,14 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.will.himalaya.R;
 
-public class ConfirmDialog <T> extends Dialog{
+public class ConfirmCheckBoxDialog<T> extends Dialog{
 
-    private TextView mCancelSub;
-    private TextView mGiveUp;
+    private TextView mCancel;
+    private TextView mConfirm;
     private OnDialogActionClickListener mDialogActionClickListener = null;
     private T mField = null;
     private TextView mTipsTv;
@@ -24,36 +25,40 @@ public class ConfirmDialog <T> extends Dialog{
     private String mGiveUpTips = null;
     //设置提示内容
     private String mTipsTvContent = null;
+    private OnDialogClickListener mDialogClickListener = null;
+    private T field = null;
+    private CheckBox mCheckBox;
 
-    public ConfirmDialog(@NonNull Context context) {
+    public ConfirmCheckBoxDialog(@NonNull Context context) {
         this(context,0);
     }
 
-    public ConfirmDialog(@NonNull Context context, int themeResId) {
+    public ConfirmCheckBoxDialog(@NonNull Context context, int themeResId) {
         this(context, true,null);
     }
 
-    protected ConfirmDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected ConfirmCheckBoxDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_confirm);
+        setContentView(R.layout.dialog_check_box_confirm);
         initView();
         initListener();
     }
 
     private void initView() {
-        mCancelSub = this.findViewById(R.id.dialog_check_box_cancel);
-        mGiveUp = this.findViewById(R.id.dialog_check_box_confirm);
+        mCancel = this.findViewById(R.id.dialog_check_box_cancel);
+        mConfirm = this.findViewById(R.id.dialog_check_box_confirm);
         mTipsTv = this.findViewById(R.id.dialog_tips_text);
+        mCheckBox = this.findViewById(R.id.dialog_check_box);
     }
 
     private void initListener() {
-        mCancelSub.setOnClickListener(mListener);
-        mGiveUp.setOnClickListener(mListener);
+        mCancel.setOnClickListener(mListener);
+        mConfirm.setOnClickListener(mListener);
     }
 
     private View.OnClickListener mListener = new View.OnClickListener() {
@@ -66,21 +71,27 @@ public class ConfirmDialog <T> extends Dialog{
                         mDialogActionClickListener.onCancelSubClick(mField);
                         dismiss();
                     }
+
+                    if (mDialogClickListener != null){
+                        mDialogClickListener.onCancelSubClick();
+                        dismiss();
+                    }
                     break;
                 case R.id.dialog_check_box_confirm:
+                    boolean isChecked = mCheckBox.isChecked();
                     if (mDialogActionClickListener != null) {
-                        mDialogActionClickListener.onGiveUpClick();
+                        mDialogActionClickListener.onConfirmClick();
+                        dismiss();
+                    }
+
+                    if (mDialogClickListener != null) {
+                        mDialogClickListener.onConfirmClick(field,isChecked);
                         dismiss();
                     }
                     break;
             }
         }
     };
-
-    public void setOnDialogActionClickListener(OnDialogActionClickListener clickListener, T data){
-        this.mDialogActionClickListener = clickListener;
-        this.mField = data;
-    }
 
     public void setTips(String tips){
         if (mTipsTv != null) {
@@ -96,10 +107,26 @@ public class ConfirmDialog <T> extends Dialog{
         }
     }
 
+    public void setOnDialogActionClickListener(OnDialogActionClickListener clickListener, T data){
+        this.mDialogActionClickListener = clickListener;
+        this.mField = data;
+    }
+
     public interface OnDialogActionClickListener<T>{
         void onCancelSubClick(T data);
 
-        void onGiveUpClick();
+        void onConfirmClick();
+    }
+
+    public void setOnDialogClickListener(OnDialogClickListener clickListener,T data){
+        this.mDialogClickListener = clickListener;
+        this.field = data;
+    }
+
+    public interface OnDialogClickListener<T>{
+        void onCancelSubClick();
+
+        void onConfirmClick(T data,boolean isChecked);
     }
 
 }

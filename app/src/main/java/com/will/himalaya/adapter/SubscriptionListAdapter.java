@@ -2,9 +2,11 @@ package com.will.himalaya.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.RequestManager;
 import com.will.himalaya.R;
 import com.will.himalaya.viewholder.SubscriptionViewHolder;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
@@ -16,15 +18,16 @@ import java.util.List;
  */
 public class SubscriptionListAdapter extends BaseAdapterT<Album,SubscriptionViewHolder>{
 
-    public SubscriptionListAdapter(Context context, List<Album> list) {
-        super(context, list);
+
+    public SubscriptionListAdapter(Context context, List<Album> list, RequestManager glide) {
+        super(context, list, glide);
     }
 
     @NonNull
     @Override
     public SubscriptionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.item_recommend,parent,false);
-        return new SubscriptionViewHolder(itemView);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend,parent,false);
+        return new SubscriptionViewHolder(itemView,mGlide);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class RecommendPresenter implements IRecommendPresenter{
     private static final String TAG = "RecommendPresenter";
     private List<IRecommendViewCallback> mCallbacks = new ArrayList<>();
     private List<Album> mCurrentRecommend = null;
+    private List<Album> mRecommendAlbumList;
 
     private RecommendPresenter(){}
 
@@ -54,16 +55,21 @@ public class RecommendPresenter implements IRecommendPresenter{
     @Override
     public void getRecommendList() {
         updateLoading();
+        if (mRecommendAlbumList != null && 0 < mRecommendAlbumList.size()) {
+            handerRecommendResult(mRecommendAlbumList);
+            LogUtil.i(TAG,"native:size------>" + mRecommendAlbumList.size());
+            return;
+        }
         XimalayApi.getXimalayApi().getRecommendList(new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 if (gussLikeAlbumList != null){
 
                     if (gussLikeAlbumList != null) {
-                        List<Album> albumList = gussLikeAlbumList.getAlbumList();
-                        LogUtil.i(TAG,"size------>" + albumList.size());
+                        mRecommendAlbumList = gussLikeAlbumList.getAlbumList();
+                        LogUtil.i(TAG,"network:size------>" + mRecommendAlbumList.size());
 
-                        handerRecommendResult(albumList);
+                        handerRecommendResult(mRecommendAlbumList);
                     }
 
                 }

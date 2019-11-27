@@ -1,5 +1,6 @@
 package com.will.himalaya.fragment;
 
+import android.app.Activity;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.will.himalaya.R;
 import com.will.himalaya.activity.DetailActivity;
@@ -45,6 +48,13 @@ public class SubscriptionFragment extends BaseFragment implements ISubscriptionC
     private List<Album> mAlbumList = new ArrayList<>();
     private SubscriptionListAdapter mSubscriptionListAdapter;
     private TwinklingRefreshLayout mRefreshLayout;
+    private Activity mContext;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.mContext = activity;
+    }
 
     @Override
     protected View onSubViewLoaded(final LayoutInflater inflater, ViewGroup container) {
@@ -107,7 +117,8 @@ public class SubscriptionFragment extends BaseFragment implements ISubscriptionC
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext(), RecyclerView.VERTICAL, false);
         mSubListView.setLayoutManager(linearLayoutManager);
 
-        mSubscriptionListAdapter = new SubscriptionListAdapter(getContext(), mAlbumList);
+        RequestManager mRequestManager= Glide.with(this);
+        mSubscriptionListAdapter = new SubscriptionListAdapter(mContext, mAlbumList,mRequestManager);
         mSubListView.setAdapter(mSubscriptionListAdapter);
         //设置item的间距
         mSubListView.addItemDecoration(new RecyclerView.ItemDecoration() {

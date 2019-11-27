@@ -247,7 +247,7 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
 
 
         mDetailList.addItemDecoration(new DetailListItemDecoration(left,right,topBottom,getResources().getColor(R.color.recycler_back_ground_color)));
-        mDetailListAdapter = new DetailListAdapter(this,mTrackList);
+        mDetailListAdapter = new DetailListAdapter(this,mTrackList,null);
         mDetailList.setAdapter(mDetailListAdapter);
 
         mDetailListAdapter.setOnItemClickListenerList(this);

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.will.himalaya.R;
 import com.will.himalaya.activity.DetailActivity;
@@ -75,8 +77,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         mRecommendRv.setLayoutManager(linearLayoutManager);
 
         mRecommendRv.addItemDecoration(new RItemDecoration());
-
-        mRecommendListAdapter = new RecommendListAdapter(getContext(),mAlbumList);
+        RequestManager mRequestManager= Glide.with(this);
+        mRecommendListAdapter = new RecommendListAdapter(getContext(),mAlbumList,mRequestManager);
 
         mRecommendRv.setAdapter(mRecommendListAdapter);
 
